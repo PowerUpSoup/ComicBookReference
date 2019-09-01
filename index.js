@@ -12,13 +12,8 @@ function populateSearchResults(responseJson) {
 
 }
 
-function makeRequestToComicVine(characterEntry) {
-    fetch("https://comicvine.gamespot.com/api/character/?api_key=6f149cf016e46702bc7dac438b4b48106b6a0892&filter=name: ${characterEntry}&format=json", {
-        method: 'GET',
-        headers: {
-            'Access-Control-Allow-Origin:': '*'
-        }
-    })
+function makeRequestToComicVine(comicVineRequest) {
+    fetch(comicVineRequest)
         .then(response => response.json())
         .then(responseJson => populateSearchResults(responseJson))
         .catch(error => console.log(error));
@@ -26,7 +21,8 @@ function makeRequestToComicVine(characterEntry) {
 
 function formatSearchParameters(searchOption, characterEntry) {
     if (searchOption == "Character") {
-        makeRequestToComicVine(characterEntry);
+        let comicVineRequest = "https://comicvine.gamespot.com/api/characters/?api_key=6f149cf016e46702bc7dac438b4b48106b6a0892&filter=name:" + characterEntry + "&format=json";
+        makeRequestToComicVine(comicVineRequest);
     } else if (searchOption == "Issue") {
         let comicVineRequest = "https://comicvine.gamespot.com/api/issues/?api_key=6f149cf016e46702bc7dac438b4b48106b6a0892&filter=name:" + characterEntry + "&format=json";
         makeRequestToComicVine(comicVineRequest);
