@@ -12,16 +12,16 @@
 </head>
 
 <body>
-    <header>
+    <header class="">
         <h1>Header: App Title</h1>
         <p>A hero image and some instructions for the search below go here.</p>
     </header>
     <form id="search-options">
-        <fieldset class="search-by-checkbox">
+        <fieldset class="search-radio">
             <legend>Search By:</legend>
-            Character: <input type="radio" name="search-resource" value="Character"><br>
-            Issue: <input type="radio" name="search-resource" value="Issue"><br>
-            Story Arc: <input type="radio" name="search-resource" value="Story Arc">
+            Character: <input type="radio" name="search-resource" value="Character" required><br>
+            Issue: <input type="radio" name="search-resource" value="Issue" required><br>
+            Story Arc: <input type="radio" name="search-resource" value="Story Arc" required>
         </fieldset>
         <div class="user-input-div">
             <h4>Enter Character Name:</h4>
@@ -29,34 +29,21 @@
             <input type="submit" id="search-by-input-submit" value="Submit">
         </div>
     </form>
-    <section id="plant-search-list"></section>
-    <ul class="search-results">
-        <ul class="search-item">
-            <li>
-                <h3>Search Item 1 Name</h3>
-            </li>
-            <li>Additional Item 1 Info</li><br>
+    <section id="comic-search-list">
+        <ul class="search-results hidden">
+            <ul class="search-item">
+                <li>
+                    <h3>Search Item 1 Name</h3>
+                </li>
+                <li>Additional Item 1 Info</li><br>
+            </ul>
+            
         </ul>
-        <ul class="search-item">
-            <li>
-                <h3>Search Item 2 Name</h3>
-            </li>
-            <li>Additional Item 2 Info</li><br>
-        </ul>
-        <ul class="search-item">
-            <li>
-                <h3>Search Item 3 Name</h3>
-            </li>
-            <li>Additional Item 3 Info</li><br>
-        </ul>
-    </ul>
-    <section id="plant-info">
-        <div class="plant-info-div">
+    </section>
+    <section id="comic-info-overlay hidden">
+        <div class="comic-info-overlay-content">
             <h4>Information</h4>
-            <p><b>Lorem Ipsum:</b>dolor sit amet consecutor</p><br>
-            <p><b>Lorem Ipsum:</b>dolor sit amet consecutor</p><br>
-            <p><b>Lorem Ipsum:</b>dolor sit amet consecutor</p><br>
-            <p><b>Lorem Ipsum:</b>dolor sit amet consecutor</p><br>
+            <p><b>Lorem Ipsum:</b>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p><br>
             <button class="information-close-window">close</button>
         </div>
     </section>
