@@ -13,11 +13,16 @@ function populateSearchResults(responseJson) {
 }
 
 function makeRequestToComicVine(comicVineRequest) {
-        fetch(comicVineRequest)
+    fetch(comicVineRequest, {
+        method: 'GET',
+        headers: {
+            'Access-Control-Allow-Origin:':'*'
+        }
+    })
         .then(response => response.json())
         .then(responseJson => populateSearchResults(responseJson))
-        .catch(error => console.log(error))
-    }
+        .catch(error => console.log(error));
+}
 
 function formatSearchParameters(searchOption, characterEntry) {
     if (searchOption == "Character") {
@@ -39,11 +44,11 @@ function watchForm() {
         let characterEntry = document.getElementById("search-by-input").value;
         console.log(searchOption);
         console.log(characterEntry);
-        formatSearchParameters(searchOption, characterEntry);        
-    }); 
+        formatSearchParameters(searchOption, characterEntry);
+    });
 }
 
-$(function() {
+$(function () {
     console.log('App loaded and waining for user input!');
     watchForm();
-} )
+})
