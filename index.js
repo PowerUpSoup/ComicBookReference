@@ -27,13 +27,13 @@ function makeRequestToComicVine(comicVineRequest) {
 
 function formatSearchParameters(searchOption, characterEntry) {
     if (searchOption == "Character") {
-        let comicVineRequest = "https://cors.io/?https://comicvine.gamespot.com/api/characters/?api_key=6f149cf016e46702bc7dac438b4b48106b6a0892&filter=name:" + characterEntry + "&format=json";
+        let comicVineRequest = "https://comicvine.gamespot.com/api/characters/?api_key=6f149cf016e46702bc7dac438b4b48106b6a0892&filter=name:" + characterEntry + "&format=json";
         makeRequestToComicVine(comicVineRequest);
     } else if (searchOption == "Issue") {
-        let comicVineRequest = "https://cors.io/?https://comicvine.gamespot.com/api/issues/?api_key=6f149cf016e46702bc7dac438b4b48106b6a0892&filter=name:" + characterEntry + "&format=json";
+        let comicVineRequest = "https://comicvine.gamespot.com/api/issues/?api_key=6f149cf016e46702bc7dac438b4b48106b6a0892&filter=name:" + characterEntry + "&format=json";
         makeRequestToComicVine(comicVineRequest);
     } else if (searchOption = "Story Arc") {
-        let comicVineRequest = "https://cors.io/?https://comicvine.gamespot.com/api/story_arcs/?api_key=6f149cf016e46702bc7dac438b4b48106b6a0892&filter=name:" + characterEntry + "&format=json";
+        let comicVineRequest = "https://comicvine.gamespot.com/api/story_arcs/?api_key=6f149cf016e46702bc7dac438b4b48106b6a0892&filter=name:" + characterEntry + "&format=json";
         makeRequestToComicVine(comicVineRequest);
     }
 }
@@ -45,7 +45,7 @@ function watchForm() {
         let characterEntry = document.getElementById("search-by-input").value;
         console.log(searchOption);
         console.log(characterEntry);
-        makeRequestToComicVine(searchOption, characterEntry);
+        formatSearchParameters(searchOption, characterEntry);
     });
 }
 
