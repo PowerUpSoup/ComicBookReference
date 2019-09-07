@@ -1,35 +1,53 @@
-function CloseEventListener() {
-
+function closeEventListener() {
+    $('.information-close-window').on('click', event => {
+        console.log('close button pressed');
+        $('header').removeClass("blur");
+        $('#search-options').removeClass("blur");
+        $('#comic-search-list').removeClass("blur");
+        $('#comic-info-overlay').addClass("hidden");
+        $('.comic-info-overlay-content').empty();
+    })
 }
 
-function populateInformationPanel(responseJson, searchOption, identifier) {
+function populateInformationPanel(responseJson, searchOption, searchItemID) {
     if (searchOption == "Character") {
         $('.comic-info-overlay-content').append(
-            `<h2>${responseJson.results[identifier].name}</h2>
-            <img src="${responseJson.results[identifier].image.original_url}>
-            <p><b>Aliases:</b> ${responseJson.results[identifier].aliases}</p>
+            `<h2>${responseJson.results[searchItemID].name}</h2>
+            <img src=${responseJson.results[searchItemID].image.original_url}>
+            <p><b>Aliases:</b> ${responseJson.results[searchItemID].aliases}</p>
+            <p><b>First Appearance: </b>${responseJson.results[searchItemID].first_appeared_in_issue.name}</p>
+            <p><b>Bio: </b>${responseJson.results[searchItemID].description}</p>
+            <button type="button" class="information-close-window">Close</button>
             `
         )
     } else if (searchOption == "Issue") {
         $('.comic-info-overlay-content').append(
-            
+            `<h2>${responseJson.results[searchItemID].name}</h2>
+            <img src=${responseJson.results[searchItemID].image.original_url}>
+            <p><b>Cover Date:</b> ${responseJson.results[searchItemID].cover_date}</p>
+            <p>${responseJson.results[searchItemID].description}</p>
+            <button type="button" class="information-close-window">Close</button>
+            `
             )
     } else if (searchOption == "Story Arc") {
         $('.comic-info-overlay-content').append(
-            
+            `<h2>${responseJson.results[searchItemID].name}</h2>
+            <img src=${responseJson.results[searchItemID].image.original_url}>
+            <p>${responseJson.results[searchItemID].description}</p>
+            <button type="button" class="information-close-window">Close</button>
+            `
             )
     }
+    closeEventListener();
 }
 
 function searchResultsEventListener(responseJson, searchOption) {
     $('.search-item').on('click', event => {
-        console.log($('.search-item').value);
-        console.log("search-item clicked");
-        console.log(identifier);
+        let searchItemID = event.currentTarget.attributes.id.value;
         $('header').addClass("blur");
         $('#search-options').addClass("blur");
         $('#comic-search-list').addClass("blur");
-        populateInformationPanel(responseJson, searchOption, identifier);    
+        populateInformationPanel(responseJson, searchOption, searchItemID);    
         $('#comic-info-overlay').removeClass("hidden");
     })
 }

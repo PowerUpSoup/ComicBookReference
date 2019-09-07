@@ -104,8 +104,6 @@ header p {
     margin-right: 5px;
 }
 
-
-
 #comic-info-overlay {
     position: fixed; /* Sit on top of the page content */
     border: 1px solid black;
@@ -134,7 +132,19 @@ header p {
     filter: blur(1px);
 }
 
+.comic-info-overlay-content img {
+    max-width: 60%;
+    border: 1px solid black;
+}
+
+.comic-info-overlay-content figure {
+    max-width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
 .comic-info-overlay-content .information-close-window {
+    position: static;
     width: 50px;
     padding: 5px;
     margin: 5px;
