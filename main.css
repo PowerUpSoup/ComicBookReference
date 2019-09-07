@@ -55,9 +55,10 @@ header p {
 #comic-search-list {
     background-color: grey;
     height: 100vh;
+    overflow-y: scroll;
 }
 
-.search-results {
+#search-results {
     width: 90%;
     margin: 0;
     margin-right: 5%;
@@ -69,7 +70,11 @@ header p {
     text-align: left;
 }
 
-.search-results ul {
+#search-results .hidden {
+    display: none;
+}
+
+#search-results {
     width: 90%;
     background-color: gainsboro;
     padding: 0px;
@@ -78,44 +83,45 @@ header p {
     margin-left: 5%;
 }
 
-.search-results li {
+.search-item {
     list-style: none;
+    display: flex;
+    border: 1px solid grey;
+}
+
+.search-item:hover {
+    border: 2px solid yellow;
+}
+
+.search-item img {
+    size: 60%;
+    border: 1px solid black;
+    max-width: 80px;
+    max-height: 80px;
+    margin-left: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 5px;
 }
 
 #comic-info-overlay {
-    /* background-color: gainsboro;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
+    position: fixed; /* Sit on top of the page content */
     border: 1px solid black;
+    width: 80%; /* Full width (cover the whole page) */
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 80%; /* Full height (cover the whole page) */
+    margin-top: 10%;
+    margin-bottom: 10%;
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(201, 201, 201); /* Black background with opacity */
     text-align: center;
-    margin: 0%;
-    filter: none; */
-
-        position: fixed; /* Sit on top of the page content */
-        display:  ; /* Hidden by default */
-        border: 1px solid black;
-        width: 80%; /* Full width (cover the whole page) */
-        margin-left: 10%;
-        margin-right: 10%;
-        height: 80%; /* Full height (cover the whole page) */
-        margin-top: 10%;
-        margin-bottom: 10%;
-        top: 0; 
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgb(201, 201, 201); /* Black background with opacity */
-        text-align: center;
-        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-        cursor: pointer; /* Add a pointer on hover */
-        overflow-y: scroll;
-      
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+    overflow-y: scroll;      
 }
 
 .comic-info-overlay-content p {
@@ -126,7 +132,19 @@ header p {
     filter: blur(1px);
 }
 
+.comic-info-overlay-content img {
+    max-width: 60%;
+    border: 1px solid black;
+}
+
+.comic-info-overlay-content figure {
+    max-width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
 .comic-info-overlay-content .information-close-window {
+    position: static;
     width: 50px;
     padding: 5px;
     margin: 5px;
@@ -135,7 +153,11 @@ header p {
 
 @media screen and (min-width: 700px) {
 
-    .search-results {
+    #search-results .hidden {
+        display: none;
+    }
+
+    #search-results {
         background-color: grey;
         width: 100%;
         margin: 0;
@@ -146,7 +168,7 @@ header p {
         text-align: left;
     }
 
-    .search-results ul {
+    #search-results ul {
         width: 60%;
         background-color: gainsboro;
         padding-left: 10px;
@@ -163,6 +185,10 @@ header p {
 }
 
 @media screen and (min-width: 1400px) {
+    #search-results .hidden {
+        display: none;
+    }
+    
     #search-options {
         width: 100%;
     }

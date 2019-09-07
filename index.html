@@ -12,9 +12,9 @@
 </head>
 
 <body>
-    <header>
-        <h1>Header: App Title</h1>
-        <p>A hero image and some instructions for the search below go here.</p>
+    <header class="">
+        <h1>Comics Reference!</h1>
+        <p>Choose a search parameter and type in a search phrase, then hit the submit button.</p>
     </header>
     <form id="search-options">
         <fieldset class="search-radio">
@@ -24,42 +24,18 @@
             Story Arc: <input type="radio" name="search-resource" value="Story Arc" required>
         </fieldset>
         <div class="user-input-div">
-            <h4>Enter Character Name:</h4>
+            <h4>Enter Search Phrase:</h4>
             <input type="text" id="search-by-input" placeholder="Search Entry" required>
             <input type="submit" id="search-by-input-submit" value="Submit">
         </div>
     </form>
-    <section id="comic-search-list"></section>
-    <ul class="search-results">
-        <ul class="search-item">
-            <li>
-                <h3>Search Item 1 Name</h3>
-            </li>
-            <li>Additional Item 1 Info</li><br>
+    <section id="comic-search-list">
+        <ul id="search-results" class="hidden">
         </ul>
-        <ul class="search-item">
-            <li>
-                <h3>Search Item 2 Name</h3>
-            </li>
-            <li>Additional Item 2 Info</li><br>
-        </ul>
-        <ul class="search-item">
-            <li>
-                <h3>Search Item 3 Name</h3>
-            </li>
-            <li>Additional Item 3 Info</li><br>
-        </ul>
-    </ul>
-    <section id="comic-info">
-        <div class="comic-info-div">
-            <h4>Information</h4>
-            <p><b>Lorem Ipsum:</b>dolor sit amet consecutor</p><br>
-            <p><b>Lorem Ipsum:</b>dolor sit amet consecutor</p><br>
-            <p><b>Lorem Ipsum:</b>dolor sit amet consecutor</p><br>
-            <p><b>Lorem Ipsum:</b>dolor sit amet consecutor</p><br>
-            <button class="information-close-window">close</button>
+    </section>
+    <section id="comic-info-overlay" class="hidden">
+        <div class="comic-info-overlay-content">
         </div>
     </section>
 </body>
-
 </html>
