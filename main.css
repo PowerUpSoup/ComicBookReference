@@ -1,6 +1,7 @@
 body{ 
     margin: 0;
     height: 100%;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .hidden {
@@ -9,18 +10,34 @@ body{
 
 header {
     width: 100%;
+    height: 40vh;
+    color: white;
+    background-image: url("ComicReference-HeroImage.jpeg");
     background-color: grey;
     text-align: center;
 }
 
 header h1 {
     padding: 20px;
+    padding-top: 100px;
     margin: 0px;
+    text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
 }
 
 header p {
+    background-color: rgb(73, 73, 73);
     padding: 20px;
+    padding-bottom: 30px;
     margin: 0px;
+    text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
 }
 
 #search-options {
@@ -53,6 +70,7 @@ header p {
 }
 
 #comic-search-list {
+    background-image: url("ComicReference-HeroImage.jpeg");
     background-color: grey;
     height: 100vh;
     overflow-y: scroll;
@@ -117,7 +135,7 @@ header p {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgb(201, 201, 201); /* Black background with opacity */
+    background-color: rgb(216, 216, 216); /* Black background with opacity */
     text-align: center;
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
@@ -152,52 +170,49 @@ header p {
 }
 
 @media screen and (min-width: 700px) {
-
-    #search-results .hidden {
-        display: none;
-    }
-
     #search-results {
-        background-color: grey;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        padding-left: 0px;
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-    }
-
-    #search-results ul {
-        width: 60%;
+        width: 70%;
         background-color: gainsboro;
-        padding-left: 10px;
-        margin-left: 20%;
-        margin-right: 20%;
+        padding: 0px;
+        margin-top: 1px;
+        margin-right: 15%;
+        margin-left: 15%;
     }
 
     .comic-info-overlay-content {
-        width: 80%;
-        margin-left: 10%;
-        margin-right: 10%;
-        text-align: center;
+        margin: 50px;
+        margin-top: 20px;
     }
 }
 
-@media screen and (min-width: 1400px) {
-    #search-results .hidden {
-        display: none;
+@media screen and (min-width: 1000px) {
+    #search-results {
+        width: 50%;
+        background-color: gainsboro;
+        padding: 0px;
+        margin-top: 1px;
+        margin-right: 25%;
+        margin-left: 25%;
     }
-    
-    #search-options {
-        width: 100%;
-    }
-    
 
     .comic-info-overlay-content {
-        width: 60%;
-        margin-left: 20%;
-        margin-right: 20%;
-       
+        margin: 100px;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    #search-results {
+        width: 50%;
+        background-color: gainsboro;
+        padding: 0px;
+        margin-top: 1px;
+        margin-right: 25%;
+        margin-left: 25%;
+    }
+
+    .comic-info-overlay-content {
+        margin: 100px;
+        margin-top: 20px;
     }
 }
