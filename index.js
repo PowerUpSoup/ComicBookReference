@@ -1,6 +1,6 @@
 function closeEventListener() {
+    //sets up the event listener for closing the information panel and returing to the search list
     $('.information-close-window').on('click', event => {
-        console.log('close button pressed');
         $('header').removeClass("blur");
         $('#search-options').removeClass("blur");
         $('#comic-search-list').removeClass("blur");
@@ -9,7 +9,15 @@ function closeEventListener() {
     })
 }
 
+//disables all links in the bio of the information panel, because the links provided by the API tend to break
+function cleanAnchorsFromInformationPanel() {
+    $('.comic-info-overlay-content').find('a').each(function(e) {
+        $(this).addClass('disabled');
+    })
+}
+
 function populateInformationPanel(responseJson, searchOption, searchItemID) {
+    //builds content for the information display panel based on the search parameter
     if (searchOption == "Character") {
         $('.comic-info-overlay-content').append(
             `<h2>${responseJson.results[searchItemID].name}</h2>
@@ -28,7 +36,7 @@ function populateInformationPanel(responseJson, searchOption, searchItemID) {
             <p>${responseJson.results[searchItemID].description}</p>
             <button type="button" class="information-close-window">Close</button>
             `
-            )
+        )
     } else if (searchOption == "Story Arc") {
         $('.comic-info-overlay-content').append(
             `<h2>${responseJson.results[searchItemID].name}</h2>
@@ -36,25 +44,28 @@ function populateInformationPanel(responseJson, searchOption, searchItemID) {
             <p>${responseJson.results[searchItemID].description}</p>
             <button type="button" class="information-close-window">Close</button>
             `
-            )
+        )
     }
     closeEventListener();
 }
 
 function searchResultsEventListener(responseJson, searchOption) {
+    //set up an event listener for the search menu items
     $('.search-item').on('click', event => {
         let searchItemID = event.currentTarget.attributes.id.value;
         $('header').addClass("blur");
         $('#search-options').addClass("blur");
         $('#comic-search-list').addClass("blur");
-        populateInformationPanel(responseJson, searchOption, searchItemID);    
+        populateInformationPanel(responseJson, searchOption, searchItemID);
+        cleanAnchorsFromInformationPanel();
         $('#comic-info-overlay').removeClass("hidden");
     })
 }
 
 function populateSearchResults(responseJson, searchOption) {
+    //clears the search list upon a second search
     $('#search-results').empty();
-    console.log(responseJson);
+    //builds different search list items based on the search parameters
     if (searchOption == "Character") {
         for (i = 0; i < responseJson.results.length; i++) {
             $('#search-results').append(
@@ -91,21 +102,57 @@ function populateSearchResults(responseJson, searchOption) {
             )
         }
     }
-$('#search-results').removeClass("hidden");
-searchResultsEventListener(responseJson, searchOption);
+    $('#search-results').removeClass("hidden");
+    searchResultsEventListener(responseJson, searchOption);
 }
 
+//loop through everything in the responseJson object and find all NULL values, turn them to empty strings
+function cleanSearchResults(responseJson, searchOption) {
+    console.log(responseJson);
+    for (i = 0; i < responseJson.results.length; i++) {
+        if (responseJson.results.bio === null){
+            responseJson.results.bio = "There's no bio available for this character."
+        }
+        if (responseJson.results[i].name === null) {
+            responseJson.results[i].name = " ";
+        }
+        if (responseJson.results[i].real_name === null) {
+            responseJson.results[i].real_name = " ";
+        }
+        if (responseJson.results[i].aliases === null) {
+            responseJson.results[i].aliases = " ";
+        }
+        if (responseJson.results[i].first_appeared_in_issue !== null) {
+            if (responseJson.results[i].first_appeared_in_issue.name === null) {
+                responseJson.results[i].first_appeared_in_issue.name = " ";
+            } else {
+            responseJson.results[i].first_appeared_in_issue = " ";
+            }
+        }
+        if (responseJson.results[i].cover_date === null) {
+            responseJson.results[i].cover_date = " ";
+        }
+    }
+    if (responseJson.results.length === 0){
+        alert("Your search returned no results. Try being more specific.");
+    }
+    populateSearchResults(responseJson, searchOption);
+}
+
+
 function makeRequestToComicVine(comicVineRequest, searchOption) {
-    console.log("Get Request = " + comicVineRequest);
+    //This fetch request routes through the Heroku app to circumvent the problem of CORS blocking
+    //Then it posts the response as a JSON object the app can parse
     fetch(`https://cors-anywhere.herokuapp.com/${comicVineRequest}`, {
         method: 'GET'
     })
         .then(response => response.json())
-        .then(responseJson => populateSearchResults(responseJson, searchOption))
+        .then(responseJson => cleanSearchResults(responseJson, searchOption))
         .catch(error => console.log(error));
 }
 
 function formatSearchParameters(searchOption, characterEntry) {
+    //Differentiate between the three search parameters
     if (searchOption == "Character") {
         let comicVineRequest = "https://comicvine.gamespot.com/api/characters/?api_key=6f149cf016e46702bc7dac438b4b48106b6a0892&filter=name:" + characterEntry + "&format=json";
         makeRequestToComicVine(comicVineRequest, searchOption);
@@ -119,17 +166,17 @@ function formatSearchParameters(searchOption, characterEntry) {
 }
 
 function watchForm() {
+    //Set up event listeners for the search menu
     $('form').submit(event => {
         event.preventDefault();
         let searchOption = document.querySelector('input[name="search-resource"]:checked').value;
         let characterEntry = document.getElementById("search-by-input").value;
-        console.log(searchOption);
-        console.log(characterEntry);
         formatSearchParameters(searchOption, characterEntry);
     });
 }
 
 $(function () {
-    console.log('App loaded and waining for user input!');
     watchForm();
 })
+
+
