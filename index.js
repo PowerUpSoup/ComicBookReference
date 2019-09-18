@@ -11,7 +11,7 @@ function closeEventListener() {
 
 //disables all links in the bio of the information panel, because the links provided by the API tend to break
 function cleanAnchorsFromInformationPanel() {
-    $('.comic-info-overlay-content').find('a').each(function(e) {
+    $('.comic-info-overlay-content').find('a').each(function (e) {
         $(this).addClass('disabled');
     })
 }
@@ -106,11 +106,19 @@ function populateSearchResults(responseJson, searchOption) {
     searchResultsEventListener(responseJson, searchOption);
 }
 
+function displayAlertMessage() {
+    $('.search-results-error').removeClass("hidden");
+    $('.error-message-close').on('click', event => {
+        console.log("the button was clicked");
+        $('.search-results-error').addClass("hidden");
+    })
+}
+
 //loop through everything in the responseJson object and find all NULL values, turn them to empty strings
 function cleanSearchResults(responseJson, searchOption) {
     console.log(responseJson);
     for (i = 0; i < responseJson.results.length; i++) {
-        if (responseJson.results.bio === null){
+        if (responseJson.results.bio === null) {
             responseJson.results.bio = "There's no bio available for this character."
         }
         if (responseJson.results[i].name === null) {
@@ -122,19 +130,21 @@ function cleanSearchResults(responseJson, searchOption) {
         if (responseJson.results[i].aliases === null) {
             responseJson.results[i].aliases = " ";
         }
-        if (responseJson.results[i].first_appeared_in_issue !== null) {
-            if (responseJson.results[i].first_appeared_in_issue.name === null) {
-                responseJson.results[i].first_appeared_in_issue.name = " ";
-            } else {
-            responseJson.results[i].first_appeared_in_issue = " ";
+        if (searchOption != "Issue") {
+            if (responseJson.results[i].first_appeared_in_issue !== null) {
+                if (responseJson.results[i].first_appeared_in_issue.name === null) {
+                    responseJson.results[i].first_appeared_in_issue.name = " ";
+                } else {
+                    responseJson.results[i].first_appeared_in_issue = " ";
+                }
             }
         }
         if (responseJson.results[i].cover_date === null) {
             responseJson.results[i].cover_date = " ";
         }
     }
-    if (responseJson.results.length === 0){
-        alert("Your search returned no results. Try being more specific.");
+    if (responseJson.results.length === 0) {
+        displayAlertMessage();
     }
     populateSearchResults(responseJson, searchOption);
 }
