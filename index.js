@@ -109,7 +109,6 @@ function populateSearchResults(responseJson, searchOption) {
 function displayAlertMessage() {
     $('.search-results-error').removeClass("hidden");
     $('.error-message-close').on('click', event => {
-        console.log("the button was clicked");
         $('.search-results-error').addClass("hidden");
     })
 }
